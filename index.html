@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajla &amp; Seth — November 22, 2026</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #F0E8DB;
+      --tree-dark: #81726D;
+      --tree-mid: #A89C94;
+      --text: #3a302c;
+      --text-light: #6b5f5a;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Georgia', 'Times New Roman', serif;
+      overflow-x: hidden;
+    }
+
+    /* ─── TREE DECORATIONS ─── */
+    .tree {
+      position: fixed;
+      pointer-events: none;
+      z-index: 50;
+      user-select: none;
+    }
+
+    @keyframes sway-tr {
+
+      0%,
+      100% {
+        transform: rotate(0deg);
+      }
+
+      40% {
+        transform: rotate(1.2deg) translateX(2px);
+      }
+
+      70% {
+        transform: rotate(-0.4deg) translateX(-1px);
+      }
+    }
+
+    @keyframes sway-rm {
+
+      0%,
+      100% {
+        transform: rotate(0deg) translateY(0);
+      }
+
+      40% {
+        transform: rotate(0.8deg) translateY(-3px);
+      }
+
+      70% {
+        transform: rotate(-0.3deg) translateY(2px);
+      }
+    }
+
+    @keyframes sway-bl {
+
+      0%,
+      100% {
+        transform: rotate(0deg);
+      }
+
+      40% {
+        transform: rotate(-1.1deg) translateX(-2px);
+      }
+
+      70% {
+        transform: rotate(0.5deg) translateX(1px);
+      }
+    }
+
+    /* top-right: floral cluster (193×211px native)
+       at 230px wide → renders 251px tall → bottom edge ≈ 241px */
+    .tree-tr {
+      top: -10px;
+      right: -24px;
+      width: 230px;
+      transform-origin: top right;
+      animation: sway-tr 7s ease-in-out infinite;
+    }
+
+    /* right mid-upper: palm fronds (160×222px native)
+       at 180px wide → renders 250px tall → starts 275px, bottom edge ≈ 525px */
+    .tree-rm {
+      top: 275px;
+      right: -18px;
+      width: 180px;
+      transform-origin: right top;
+      animation: sway-rm 9s ease-in-out infinite 1.5s;
+    }
+
+    /* bottom-left: floral cluster (99×218px native)
+       at 130px wide → renders 286px tall — pinned to bottom-left corner */
+    .tree-bl {
+      bottom: -16px;
+      left: -18px;
+      width: 130px;
+      transform-origin: bottom left;
+      animation: sway-bl 10s ease-in-out infinite 2s;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: rgba(240, 232, 219, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 24px rgba(129, 114, 109, 0.14);
+    }
+
+    .nav-toggle {
+      display: none;
+    }
+
+    /* hidden on desktop, shown on mobile */
+    .nav-burger {
+      display: none;
+      width: 100%;
+      height: 56px;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 24px;
+      cursor: pointer;
+    }
+
+    .burger-icon {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .burger-icon span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--tree-dark);
+      transition: transform 0.25s, opacity 0.2s;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 44px;
+      list-style: none;
+      padding: 18px 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--tree-dark);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 110px 120px 80px;
+    }
+
+    .eyebrow {
+      font-style: italic;
+      color: var(--tree-mid);
+      font-size: 1rem;
+      margin-bottom: 28px;
+      letter-spacing: 0.03em;
+    }
+
+    .hero-names {
+      font-size: clamp(2.6rem, 5.5vw, 4.6rem);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: normal;
+      line-height: 1.15;
+      color: var(--text);
+    }
+
+    .hero-and {
+      display: block;
+      font-style: italic;
+      font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+      letter-spacing: 0.04em;
+      text-transform: none;
+      color: var(--tree-mid);
+      margin: 6px 0;
+    }
+
+    .thin-rule {
+      width: 56px;
+      height: 1px;
+      background: var(--tree-mid);
+      margin: 32px auto;
+      opacity: 0.7;
+    }
+
+    .hero-date-block {
+      line-height: 2;
+      color: var(--text-light);
+    }
+
+    .hero-date-block .d-day {
+      font-style: italic;
+      font-size: 0.95rem;
+    }
+
+    .hero-date-block .d-date {
+      display: block;
+      font-style: normal;
+      font-size: clamp(0.9rem, 1.8vw, 1.15rem);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: var(--text);
+    }
+
+    .hero-date-block .d-year {
+      display: block;
+      font-style: italic;
+      font-size: 0.95rem;
+    }
+
+    .hero-date-block .d-time {
+      font-style: italic;
+      font-size: 0.88rem;
+    }
+
+    .hero-venue-block {
+      margin-top: 20px;
+    }
+
+    .hero-venue-block .v-name {
+      display: block;
+      font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: var(--text);
+    }
+
+    .hero-venue-block .v-loc {
+      display: block;
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
+
+    .hero-tagline {
+      margin-top: 36px;
+      font-style: italic;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--tree-mid);
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      padding: 88px 0;
+    }
+
+    .inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 88px;
+    }
+
+    .sec-label {
+      text-align: center;
+      font-size: 0.67rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--tree-mid);
+      margin-bottom: 14px;
+    }
+
+    .sec-title {
+      text-align: center;
+      font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+      font-weight: normal;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .sec-rule {
+      width: 36px;
+      height: 1px;
+      background: var(--tree-mid);
+      margin: 0 auto 48px;
+      opacity: 0.6;
+    }
+
+    /* ─── PHOTO PLACEHOLDERS ─── */
+    .ph {
+      background: rgba(129, 114, 109, 0.09);
+      border: 1px solid rgba(168, 156, 148, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--tree-mid);
+      font-style: italic;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+    }
+
+    .ph::before {
+      content: '';
+      width: 24px;
+      height: 24px;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      opacity: 0.45;
+      flex-shrink: 0;
+    }
+
+    /* aspect ratios */
+    .ar-3-4 {
+      aspect-ratio: 3/4;
+    }
+
+    .ar-4-3 {
+      aspect-ratio: 4/3;
+    }
+
+    .ar-2-3 {
+      aspect-ratio: 2/3;
+    }
+
+    .ar-1-1 {
+      aspect-ratio: 1/1;
+    }
+
+    .ar-16-9 {
+      aspect-ratio: 16/9;
+    }
+
+    /* ─── OUR STORY ─── */
+    .couple-photo {
+      width: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .story-blurb {
+      max-width: 580px;
+      margin: 0 auto 48px;
+      text-align: center;
+      font-style: italic;
+      color: var(--text-light);
+      line-height: 1.95;
+      font-size: 1rem;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .story-grid .couple-photo:first-child {
+      grid-row: span 2;
+      height: 100%;
+    }
+
+    .story-grid .couple-photo:not(:first-child) {
+      aspect-ratio: 4/3;
+    }
+
+    /* ─── VENUE ─── */
+    .venue-photo {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+      display: block;
+    }
+
+    .venue-photos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 48px;
+    }
+
+    .venue-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+    }
+
+    .info-block h3 {
+      font-size: 0.67rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--tree-mid);
+      margin-bottom: 12px;
+      font-weight: normal;
+    }
+
+    .info-block p {
+      color: var(--text-light);
+      line-height: 1.85;
+      font-size: 0.93rem;
+    }
+
+    .map-link {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--tree-dark);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(129, 114, 109, 0.4);
+      padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+
+    .map-link:hover {
+      border-color: var(--tree-dark);
+    }
+
+    /* ─── HOTELS ─── */
+    .hotels-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .hotel-card {
+      padding: 26px 22px 28px;
+      border: 1px solid rgba(168, 156, 148, 0.3);
+    }
+
+    .hotel-tier {
+      font-size: 0.63rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--tree-mid);
+      margin-bottom: 10px;
+    }
+
+    .hotel-card h3 {
+      font-size: 1rem;
+      font-weight: normal;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .hotel-card p {
+      font-size: 0.84rem;
+      color: var(--text-light);
+      line-height: 1.75;
+    }
+
+    .hotel-dist {
+      margin-top: 10px;
+      font-size: 0.77rem;
+      color: var(--tree-mid);
+      font-style: italic;
+    }
+
+    .hotel-link {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--tree-dark);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(129, 114, 109, 0.35);
+      padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+
+    .hotel-link:hover {
+      border-color: var(--tree-dark);
+    }
+
+    /* ─── RECEPTION ─── */
+    .reception-grid {
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    dl.details dt {
+      font-size: 0.67rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--tree-mid);
+      margin-bottom: 5px;
+      margin-top: 22px;
+    }
+
+    dl.details dt:first-child {
+      margin-top: 0;
+    }
+
+    dl.details dd {
+      font-size: 0.93rem;
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    /* ─── RSVP ─── */
+    .rsvp-wrap {
+      text-align: center;
+    }
+
+    .rsvp-note {
+      max-width: 520px;
+      margin: 0 auto 44px;
+      font-style: italic;
+      color: var(--text-light);
+      line-height: 1.9;
+      font-size: 0.97rem;
+    }
+
+    .rsvp-note strong {
+      font-style: normal;
+      font-weight: normal;
+      color: var(--text);
+    }
+
+    .rsvp-form {
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .f-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .f-row.full {
+      grid-template-columns: 1fr;
+    }
+
+    .f-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    label {
+      font-size: 0.63rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--tree-mid);
+    }
+
+    input,
+    select,
+    textarea {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(168, 156, 148, 0.45);
+      padding: 9px 0;
+      font-size: 0.9rem;
+      font-family: 'Georgia', serif;
+      color: var(--text);
+      outline: none;
+      width: 100%;
+      transition: border-color 0.22s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--tree-mid);
+      opacity: 0.6;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--tree-dark);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 72px;
+    }
+
+    select {
+      cursor: pointer;
+    }
+
+    .rsvp-form-toggle {
+      margin-top: 28px;
+    }
+
+    .rsvp-toggle-btn {
+      background: none;
+      border: none;
+      font-family: 'Georgia', serif;
+      font-style: italic;
+      font-size: 0.88rem;
+      color: var(--tree-mid);
+      cursor: pointer;
+      padding: 0;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(168, 156, 148, 0.5);
+      transition: color 0.2s;
+    }
+
+    .rsvp-toggle-btn:hover {
+      color: var(--text);
+    }
+
+    .btn-rsvp {
+      display: inline-block;
+      margin-top: 38px;
+      padding: 14px 54px;
+      border: 1px solid var(--tree-dark);
+      background: transparent;
+      color: var(--tree-dark);
+      font-family: 'Georgia', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .btn-rsvp:hover {
+      background: var(--tree-dark);
+      color: var(--bg);
+    }
+
+    /* ─── FOOTER ─── */
+    .page-orn {
+      text-align: center;
+      color: var(--tree-mid);
+      font-size: 0.85rem;
+      letter-spacing: 0.5em;
+      opacity: 0.45;
+      padding: 8px 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 0 56px;
+      font-style: italic;
+      font-size: 0.84rem;
+      color: var(--tree-mid);
+    }
+
+    /* ─── SECTION SHADOW SEPARATION ─── */
+    section {
+      position: relative;
+      background: var(--bg);
+      box-shadow: 0 8px 32px rgba(129, 114, 109, 0.14);
+      clip-path: inset(0 0 -40px 0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 860px) {
+
+      .inner,
+      .hero {
+        padding-left: 48px;
+        padding-right: 48px;
+      }
+
+      .story-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .story-grid .couple-photo:first-child {
+        grid-row: span 1;
+        height: auto;
+        aspect-ratio: 4/3;
+      }
+
+      .venue-cols {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .hotels-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .reception-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .tree-tr {
+        width: 190px;
+      }
+
+      .tree-rm {
+        width: 140px;
+        top: 228px;
+      }
+
+      .tree-bl {
+        width: 110px;
+      }
+    }
+
+    /* ─── HAMBURGER NAV ─── */
+    @media (max-width: 640px) {
+      .nav-burger {
+        display: flex;
+      }
+
+      nav ul {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        padding: 4px 0 14px;
+        position: absolute;
+        top: 56px;
+        left: 0;
+        right: 0;
+        background: rgba(240, 232, 219, 0.98);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(168, 156, 148, 0.25);
+      }
+
+      nav a {
+        display: block;
+        padding: 13px 28px;
+        font-size: 0.75rem;
+        letter-spacing: 0.18em;
+      }
+
+      .nav-toggle:checked~ul {
+        display: flex;
+      }
+
+      /* burger animates to × when open */
+      .nav-toggle:checked~.nav-burger .burger-icon span:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+      }
+
+      .nav-toggle:checked~.nav-burger .burger-icon span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .nav-toggle:checked~.nav-burger .burger-icon span:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+    }
+
+    @media (max-width: 560px) {
+      section {
+        padding: 56px 0;
+      }
+
+      .inner,
+      .hero {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .hero {
+        padding-top: 80px;
+        padding-bottom: 60px;
+      }
+
+      /* Prevent iOS input zoom (font-size must be ≥16px) */
+      input,
+      select,
+      textarea {
+        font-size: 16px;
+      }
+
+      /* Hero name: tighter on narrow screens */
+      .hero-names {
+        font-size: clamp(1.7rem, 7.5vw, 2.6rem);
+        letter-spacing: 0.08em;
+      }
+
+      .hero-and {
+        font-size: clamp(1.2rem, 5vw, 1.8rem);
+      }
+
+      /* Reduce date letter-spacing so long string doesn't overflow */
+      .hero-date-block .d-date {
+        letter-spacing: 0.08em;
+        font-size: 0.85rem;
+      }
+
+      .venue-photos {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hotels-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .story-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .story-grid .couple-photo:first-child {
+        grid-row: span 1;
+        height: auto;
+        aspect-ratio: 4/3;
+      }
+
+      .f-row {
+        grid-template-columns: 1fr;
+      }
+
+      .tree-tr {
+        width: 120px;
+        right: -12px;
+      }
+
+      .tree-rm {
+        width: 90px;
+        top: 150px;
+      }
+
+      .tree-bl {
+        width: 80px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Tree decorations -->
+  <img class="tree tree-tr" src="trees-right-b.png" alt="">
+  <img class="tree tree-rm" src="trees-right-c.png" alt="">
+  <img class="tree tree-bl" src="trees-left-a.png" alt="">
+
+  <!-- Navigation -->
+  <nav>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-burger" aria-label="Menu">
+      <div class="burger-icon">
+        <span></span><span></span><span></span>
+      </div>
+    </label>
+    <ul>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#venue">Venue</a></li>
+      <li><a href="#hotels">Hotels</a></li>
+      <li><a href="#reception">Reception</a></li>
+      <li><a href="#rsvp">RSVP</a></li>
+    </ul>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <p class="eyebrow">You are invited to the wedding of</p>
+    <h1 class="hero-names">
+      Ajla Hadzovic
+      <span class="hero-and">and</span>
+      Seth Kujawa
+    </h1>
+    <div class="thin-rule"></div>
+    <div class="hero-date-block">
+      <span class="d-day">Sunday</span>
+      <span class="d-date">The Twenty-Second of November</span>
+      <span class="d-year">2026</span>
+      <span class="d-time">At three in the afternoon</span>
+    </div>
+    <div class="hero-venue-block">
+      <span class="v-name">The Courthouse Gardens</span>
+      <span class="v-loc">Santa Barbara, California</span>
+    </div>
+    <p class="hero-tagline">dinner and celebration to follow</p>
+  </section>
+
+  <!-- ─── OUR STORY ─── -->
+  <section id="story" class="alt">
+    <div class="inner">
+      <p class="sec-label">The Couple</p>
+      <h2 class="sec-title">Ajla &amp; Seth</h2>
+      <div class="sec-rule"></div>
+      <div class="story-grid">
+        <img src="Family-Windsor2025-12.jpg" alt="Ajla and Seth" class="couple-photo">
+        <img src="Family-Windsor2025-104.jpg" alt="Ajla and Seth" class="couple-photo">
+        <img src="Family-Windsor2025-284.jpg" alt="Ajla and Seth" class="couple-photo">
+      </div>
+      <p class="story-blurb">
+        It started at the Cat's Pajamas Tiki bar in Downtown Austin, when Ajla leaned over and asked
+        Seth if he liked Lana Del Rey, the song playing, not knowing he had no idea
+        what was on. He said yes anyway. Not long after, Seth was making the thirty-minute drive
+        out to Pflugerville Texas and back, again and again, just to spend a little more time with her,
+        before finally asking her to be his girlfriend. These days you'll find them getting
+        cappuccinos, watching terrible reality television, and counting down to the next beach trip.
+        Which is exactly why, when it came time to celebrate, they wanted to bring the palm trees
+        and the sand to everyone's November.
+      </p>
+    </div>
+  </section>
+
+  <!-- ─── VENUE ─── -->
+  <section id="venue">
+    <div class="inner">
+      <p class="sec-label">Where We're Getting Married</p>
+      <h2 class="sec-title">The Courthouse Gardens</h2>
+      <div class="sec-rule"></div>
+      <div class="venue-photos">
+        <img src="sb-one.webp" alt="Santa Barbara Courthouse Gardens" class="venue-photo">
+        <img src="sb-two.webp" alt="Santa Barbara Courthouse Gardens" class="venue-photo">
+        <img src="sb-three.jpeg" alt="Santa Barbara Courthouse Gardens" class="venue-photo">
+      </div>
+      <div class="venue-cols">
+        <div class="info-block">
+          <h3>Address</h3>
+          <p>
+            Santa Barbara Courthouse<br>
+            1100 Anacapa Street<br>
+            Santa Barbara, CA 93101
+          </p>
+          <a class="map-link"
+            href="https://www.google.com/maps/search/?api=1&query=1100+Anacapa+Street+Santa+Barbara+CA+93101"
+            target="_blank" rel="noopener">View on Google Maps →</a>
+        </div>
+        <div class="info-block">
+          <h3>Getting There</h3>
+          <p>
+            The Courthouse Gardens are tucked within the landmark Santa Barbara Courthouse,
+            right in the heart of downtown. Street parking and public garages are within easy
+            walking distance, and the venue is just a few blocks from State Street.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── HOTELS ─── -->
+  <section id="hotels" class="alt">
+    <div class="inner">
+      <p class="sec-label">Where to Stay</p>
+      <h2 class="sec-title">Hotel Recommendations</h2>
+      <div class="sec-rule"></div>
+      <p class="story-blurb">
+        We're heading to Santa Barbara in April to explore the area firsthand and find
+        the best places for our guests to stay. Check back soon — recommendations are coming!
+      </p>
+
+      <!--
+      <div class="hotels-grid">
+        <div class="hotel-card">
+          <div class="hotel-tier">Closest to Venue</div>
+          <h3>Canary Hotel</h3>
+          <p>A boutique hotel in the heart of downtown Santa Barbara with a rooftop terrace,
+            fireplace, and sweeping views of the Santa Ynez Mountains.</p>
+          <p class="hotel-dist">~0.2 miles from venue</p>
+          <a class="hotel-link" href="#">Book a Room →</a>
+        </div>
+        <div class="hotel-card">
+          <div class="hotel-tier">Recommended</div>
+          <h3>Hotel Californian</h3>
+          <p>Elegant Moorish Revival architecture, a rooftop pool, and a short stroll to the venue
+            along the palm-lined streets of downtown.</p>
+          <p class="hotel-dist">~0.5 miles from venue</p>
+          <a class="hotel-link" href="#">Book a Room →</a>
+        </div>
+        <div class="hotel-card">
+          <div class="hotel-tier">Beachside Option</div>
+          <h3>Hotel Indigo</h3>
+          <p>Colorful, locally inspired boutique hotel just blocks from the beach with an
+            outdoor pool and easy access to State Street.</p>
+          <p class="hotel-dist">~0.8 miles from venue</p>
+          <a class="hotel-link" href="#">Book a Room →</a>
+        </div>
+      </div>
+      -->
+    </div>
+  </section>
+
+  <!-- ─── RECEPTION ─── -->
+  <section id="reception">
+    <div class="inner">
+      <p class="sec-label">Dinner &amp; Celebration</p>
+      <h2 class="sec-title">The Reception</h2>
+      <div class="sec-rule"></div>
+      <p class="story-blurb">
+        We're still searching for the perfect spot — our trip to Santa Barbara in April
+        will help us find a reception venue worthy of the occasion. Details to follow soon!
+      </p>
+
+      <!--
+      <div class="reception-grid">
+        <div class="ph ar-3-4">reception venue photo</div>
+        <dl class="details">
+          <dt>Location</dt>
+          <dd>[Reception venue name]<br>[Address, Santa Barbara, CA]</dd>
+          <dt>Time</dt>
+          <dd>Immediately following the ceremony<br>Cocktail hour begins at approximately 4:00 pm</dd>
+          <dt>Dinner</dt>
+          <dd>[Dinner style — seated, family-style, buffet, etc. A sentence or two about the food.]</dd>
+          <dt>Dress Code</dt>
+          <dd>Cocktail attire</dd>
+          <dt>Music &amp; Dancing</dt>
+          <dd>[Band, DJ, or other entertainment details]</dd>
+          <dt>End Time</dt>
+          <dd>The celebration will conclude at approximately [time]</dd>
+        </dl>
+      </div>
+      -->
+    </div>
+  </section>
+
+  <!-- ─── RSVP ─── -->
+  <section id="rsvp" class="alt">
+    <div class="inner">
+      <div class="rsvp-wrap">
+        <p class="sec-label">Kindly Reply</p>
+        <h2 class="sec-title">RSVP</h2>
+        <div class="sec-rule"></div>
+        <p class="rsvp-note">
+          Please let us know by <strong>June 1, 2026</strong> whether you'll be joining us.
+          Send us an email with your name, whether you're attending, and any dietary restrictions.
+        </p>
+        <a class="btn-rsvp"
+          href="mailto:sethkujawa@gmail.com?subject=RSVP%20%E2%80%94%20Your%20Name&body=Name%3A%20%0AAttending%3A%20%0AAdditional%20guests%3A%20%0ADietary%20restrictions%3A%20%0ANotes%2FSong%20requests%3A%20">Send
+          Us an Email</a>
+        <p class="rsvp-form-toggle">
+          <button type="button" id="toggle-form" class="rsvp-toggle-btn">Prefer a form? Fill it out here</button>
+        </p>
+        <form class="rsvp-form" id="rsvp-form" hidden>
+          <div class="f-row">
+            <div class="f-group">
+              <label for="first-name">First Name</label>
+              <input type="text" id="first-name" name="first_name" placeholder="Jane">
+            </div>
+            <div class="f-group">
+              <label for="last-name">Last Name</label>
+              <input type="text" id="last-name" name="last_name" placeholder="Smith">
+            </div>
+          </div>
+          <div class="f-row full">
+            <div class="f-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="jane@example.com">
+            </div>
+          </div>
+          <div class="f-row full">
+            <div class="f-group">
+              <label for="attending">Will You Be Attending?</label>
+              <select id="attending" name="attending">
+                <option value="" disabled selected>Please select…</option>
+                <option value="yes">Joyfully accepts</option>
+                <option value="no">Regretfully declines</option>
+              </select>
+            </div>
+          </div>
+          <div class="f-row full">
+            <div class="f-group">
+              <label for="guests">Who Will You Be Bringing?</label>
+              <textarea id="guests" name="guests"
+                placeholder="List the names of anyone joining you, or leave blank if attending solo…"></textarea>
+            </div>
+          </div>
+          <div class="f-row full">
+            <div class="f-group">
+              <label for="dietary">Dietary Restrictions or Allergies</label>
+              <input type="text" id="dietary" name="dietary"
+                placeholder="None, vegetarian, gluten-free, nut allergy, etc.">
+            </div>
+          </div>
+          <div class="f-row full">
+            <div class="f-group">
+              <label for="notes">Song Requests or Notes</label>
+              <textarea id="notes" name="notes" placeholder="Song requests, questions, anything at all…"></textarea>
+            </div>
+          </div>
+          <div style="text-align:center;">
+            <button type="submit" class="btn-rsvp">Send RSVP</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <p class="page-orn">— &nbsp;✦&nbsp; —</p>
+
+  <footer>
+    <p>Ajla &amp; Seth &nbsp;·&nbsp; November 22, 2026 &nbsp;·&nbsp; Santa Barbara, California</p>
+  </footer>
+
+  <script>
+    // Close mobile nav when a link is tapped
+    document.querySelectorAll('nav a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        document.getElementById('nav-toggle').checked = false;
+      });
+    });
+
+    // Toggle optional form
+    document.getElementById('toggle-form').addEventListener('click', function () {
+      var form = document.getElementById('rsvp-form');
+      var hidden = form.hasAttribute('hidden');
+      if (hidden) {
+        form.removeAttribute('hidden');
+        this.textContent = 'Hide the form';
+      } else {
+        form.setAttribute('hidden', '');
+        this.textContent = 'Prefer a form? Fill it out here';
+      }
+    });
+
+    // RSVP form → mailto
+    document.getElementById('rsvp-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var first = document.getElementById('first-name').value.trim();
+      var last = document.getElementById('last-name').value.trim();
+      var email = document.getElementById('email').value.trim();
+      var attending = document.getElementById('attending').value;
+      var guests = document.getElementById('guests').value.trim();
+      var dietary = document.getElementById('dietary').value.trim();
+      var notes = document.getElementById('notes').value.trim();
+
+      var attendingLabel = attending === 'yes' ? 'Joyfully accepts' : attending === 'no' ? 'Regretfully declines' : 'Not specified';
+
+      var body = [
+        'Name: ' + first + ' ' + last,
+        email ? 'Email: ' + email : '',
+        'Attending: ' + attendingLabel,
+        guests ? 'Additional guests: ' + guests : 'Additional guests: None',
+        dietary ? 'Dietary restrictions: ' + dietary : '',
+        notes ? 'Notes: ' + notes : '',
+      ].filter(Boolean).join('\n');
+
+      window.location.href = 'mailto:sethkujawa@gmail.com'
+        + '?subject=' + encodeURIComponent('RSVP — ' + first + ' ' + last)
+        + '&body=' + encodeURIComponent(body);
+    });
+  </script>
+
+</body>
+
+</html>
