@@ -39,6 +39,7 @@
       pointer-events: none;
       z-index: 50;
       user-select: none;
+      transition: transform 0.6s ease;
     }
 
     @keyframes sway-tr {
@@ -387,6 +388,56 @@
       color: var(--text-light);
       line-height: 1.95;
       font-size: 1rem;
+    }
+
+    .story-photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 48px;
+      align-items: stretch;
+    }
+
+    .story-photo-main {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+    }
+
+    .story-photos-pair {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .story-photos-pair .couple-photo {
+      flex: 1;
+      min-height: 0;
+      object-fit: cover;
+    }
+
+    .story-text {
+      max-width: 580px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      text-align: center;
+    }
+
+    .story-text p {
+      font-style: italic;
+      color: var(--text-light);
+      line-height: 2;
+      font-size: 1rem;
+    }
+
+    .story-text-rule {
+      width: 32px;
+      height: 1px;
+      background: var(--tree-mid);
+      opacity: 0.5;
+      margin: 4px auto 0;
     }
 
     .story-grid {
@@ -839,6 +890,10 @@
         grid-template-columns: 1fr;
       }
 
+      .story-text {
+        gap: 14px;
+      }
+
       .story-grid {
         grid-template-columns: 1fr 1fr;
       }
@@ -865,6 +920,18 @@
 
       .tree-bl {
         width: 80px;
+      }
+
+      .tree-tr.scrolled-off {
+        transform: translateX(140px) translateY(-140px);
+      }
+
+      .tree-rm.scrolled-off {
+        transform: translateX(110px);
+      }
+
+      .tree-bl.scrolled-off {
+        transform: translateX(-110px) translateY(110px);
       }
     }
   </style>
@@ -922,21 +989,31 @@
       <p class="sec-label">The Couple</p>
       <h2 class="sec-title">Ajla &amp; Seth</h2>
       <div class="sec-rule"></div>
-      <div class="story-grid">
-        <img src="Family-Windsor2025-12.jpg" alt="Ajla and Seth" class="couple-photo">
-        <img src="Family-Windsor2025-104.jpg" alt="Ajla and Seth" class="couple-photo">
-        <img src="Family-Windsor2025-284.jpg" alt="Ajla and Seth" class="couple-photo">
+      <div class="story-photos">
+        <img src="Family-Windsor2025-12.jpg" alt="Ajla and Seth" class="couple-photo story-photo-main">
+        <div class="story-photos-pair">
+          <img src="Family-Windsor2025-104.jpg" alt="Ajla and Seth" class="couple-photo">
+          <img src="Family-Windsor2025-284.jpg" alt="Ajla and Seth" class="couple-photo">
+        </div>
       </div>
-      <p class="story-blurb">
-        It started at the Cat's Pajamas Tiki bar in Downtown Austin, when Ajla leaned over and asked
-        Seth if he liked Lana Del Rey, the song playing, not knowing he had no idea
-        what was on. He said yes anyway. Not long after, Seth was making the thirty-minute drive
-        out to Pflugerville Texas and back, again and again, just to spend a little more time with her,
-        before finally asking her to be his girlfriend. These days you'll find them getting
-        cappuccinos, watching terrible reality television, and counting down to the next beach trip.
-        Which is exactly why, when it came time to celebrate, they wanted to bring the palm trees
-        and the sand to everyone's November.
-      </p>
+      <div class="story-text">
+        <p>
+          It started at the Cat's Pajamas Tiki bar in Downtown Austin, when Ajla leaned over and asked
+          Seth if he liked Lana Del Rey, the song playing, not knowing he had no idea
+          what was on. He said yes anyway.
+        </p>
+        <p>
+          Not long after, Seth was making the thirty-minute drive
+          out to Pflugerville Texas and back, again and again, just to spend a little more time with her,
+          before finally asking her to be his girlfriend.
+        </p>
+        <p>
+          These days you'll find them getting cappuccinos, watching terrible reality television,
+          and counting down to the next beach trip — which is exactly why, when it came time to
+          celebrate, they wanted to bring the palm trees and the sand to everyone's November.
+        </p>
+        <div class="story-text-rule"></div>
+      </div>
     </div>
   </section>
 
@@ -1129,6 +1206,25 @@
   </footer>
 
   <script>
+    // Slide trees off-screen on mobile when scrolling
+    (function () {
+      var trees = document.querySelectorAll('.tree');
+      var mobileBreak = 560;
+      var threshold = 60; // px scrolled before trees leave
+
+      function updateTrees() {
+        if (window.innerWidth > mobileBreak) {
+          trees.forEach(function (t) { t.classList.remove('scrolled-off'); });
+          return;
+        }
+        var scrolled = window.scrollY > threshold;
+        trees.forEach(function (t) { t.classList.toggle('scrolled-off', scrolled); });
+      }
+
+      window.addEventListener('scroll', updateTrees, { passive: true });
+      window.addEventListener('resize', updateTrees);
+    })();
+
     // Close mobile nav when a link is tapped
     document.querySelectorAll('nav a').forEach(function (a) {
       a.addEventListener('click', function () {
