@@ -1068,6 +1068,37 @@
         height: 360px;
       }
     }
+
+    /* ─── RECEPTION PHOTOS ─── */
+    .reception-photos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 44px;
+    }
+
+    .reception-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+    }
+
+    .reception-info {
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 560px) {
+      .reception-photos {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .reception-photos .reception-photo:last-child {
+        grid-column: 1 / -1;
+        aspect-ratio: 16/9;
+      }
+    }
   </style>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
 </head>
@@ -1212,69 +1243,58 @@
           <div class="hotel-rank-list">
             <div class="hotel-rank-card">
               <span class="rank-badge">#1</span>
-              <h4>Canary Hotel</h4>
-              <p>Boutique luxury in the heart of downtown with a rooftop terrace — steps from both the ceremony and reception.</p>
-              <p class="rank-stat">~0.1 mi to ceremony &nbsp;·&nbsp; ~0.1 mi to reception</p>
+              <h4>Casa Jardín</h4>
+              <p>A serene boutique hotel with a garden-lined setting in the heart of downtown — minimalistic design, on-site parking, and EV chargers, just minutes from the courthouse.</p>
+              <p class="rank-stat">~0.2 mi to ceremony &nbsp;·&nbsp; ~0.3 mi to reception</p>
             </div>
             <div class="hotel-rank-card">
               <span class="rank-badge">#2</span>
-              <h4>Inn of the Spanish Garden</h4>
-              <p>Quiet, intimate boutique hotel tucked near the courthouse in a Spanish Colonial courtyard setting.</p>
-              <p class="rank-stat">~0.3 mi to ceremony &nbsp;·&nbsp; ~0.4 mi to reception</p>
+              <h4>The Upham Hotel</h4>
+              <p>California's oldest continuously operating hotel (est. 1871) — a Victorian gem with sweeping verandas, lush gardens, and a complimentary wine happy hour each evening.</p>
+              <p class="rank-stat">~0.4 mi to ceremony &nbsp;·&nbsp; ~0.3 mi to reception</p>
             </div>
             <div class="hotel-rank-card">
               <span class="rank-badge">#3</span>
-              <h4>Hotel Californian</h4>
-              <p>Elegant Moorish Revival architecture at the south end of State Street — an easy stroll to both venues.</p>
-              <p class="rank-stat">~0.5 mi to ceremony &nbsp;·&nbsp; ~0.4 mi to reception</p>
+              <h4>Cheshire Cat Inn</h4>
+              <p>An elegant B&amp;B with gracious English hospitality and a touch of whimsy — rooms, cottages, and private suites spread across a downtown property just minutes from the best of Santa Barbara.</p>
+              <p class="rank-stat">~0.6 mi to venues &nbsp;·&nbsp; Private cottages available</p>
+            </div>
+            <div class="hotel-rank-card">
+              <span class="rank-badge">#4</span>
+              <h4>Drift Santa Barbara</h4>
+              <p>A 45-room design hotel in a restored 1920s Spanish building on State Street — bunk rooms to a rooftop penthouse, with an on-site coffee shop and Baja-inspired cocktail bar.</p>
+              <p class="rank-stat">~0.6 mi to venues &nbsp;·&nbsp; Member of Design Hotels</p>
             </div>
           </div>
         </div>
 
         <div class="hotel-category">
-          <p class="category-label">Best Beach Access</p>
+          <p class="category-label">Other Great Options</p>
           <div class="hotel-rank-list">
             <div class="hotel-rank-card">
-              <span class="rank-badge">#1</span>
-              <h4>Hotel Californian</h4>
-              <p>Two blocks from the sand with sweeping Pacific views — the easiest walk to the beach from any downtown hotel.</p>
-              <p class="rank-stat">~2 blocks to East Beach</p>
+              <h4>La Playa Inn</h4>
+              <p>A boutique mission-style inn with Spanish colonial architecture, free parking, and an open courtyard — within walking distance to the beach and an easy ride to the venues.</p>
+              <p class="rank-stat">~1 block to the beach &nbsp;·&nbsp; Free parking</p>
             </div>
             <div class="hotel-rank-card">
-              <span class="rank-badge">#2</span>
-              <h4>Canary Hotel</h4>
-              <p>A short walk down State Street puts you at the waterfront. The rooftop terrace already feels like a beach club.</p>
-              <p class="rank-stat">~0.6 mi to East Beach</p>
+              <h4>The Milo</h4>
+              <p>A hacienda-style beachfront hotel on West Beach with a pool, fire pits, complimentary bike cruisers, and an on-site café — steps from the sand.</p>
+              <p class="rank-stat">Beachfront &nbsp;·&nbsp; Pool &amp; bikes included</p>
             </div>
             <div class="hotel-rank-card">
-              <span class="rank-badge">#3</span>
-              <h4>Kimpton Goodland</h4>
-              <p>A laid-back, surf-adjacent vibe in nearby Goleta with easy freeway access to Santa Barbara beaches.</p>
-              <p class="rank-stat">~1.5 mi to the beach</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="hotel-category">
-          <p class="category-label">Best Value</p>
-          <div class="hotel-rank-list">
-            <div class="hotel-rank-card">
-              <span class="rank-badge">#1</span>
-              <h4>Kimpton Goodland</h4>
-              <p>Relaxed, well-designed, and priced well below the downtown options — great if you want more room for more nights.</p>
-              <p class="rank-stat">~8 mi to venues &nbsp;·&nbsp; IHG rewards accepted</p>
+              <h4>Harbor View Inn</h4>
+              <p>A 4-star oceanfront hotel sitting between West Beach and Stearns Wharf — every room has a private patio or balcony, with an ocean-view pool and jacuzzi on-site.</p>
+              <p class="rank-stat">Oceanfront &nbsp;·&nbsp; Ocean-view pool</p>
             </div>
             <div class="hotel-rank-card">
-              <span class="rank-badge">#2</span>
-              <h4>Inn of the Spanish Garden</h4>
-              <p>Boutique charm without the luxury markup — calm courtyards and a genuinely central location.</p>
-              <p class="rank-stat">~0.3 mi to ceremony</p>
+              <h4>Harbor House Inn</h4>
+              <p>A family-owned collection of 17 studios one block from West Beach — complimentary beach gear, cruiser bikes, and fresh coffee from a local roaster included.</p>
+              <p class="rank-stat">~1 block to West Beach &nbsp;·&nbsp; Beach gear included</p>
             </div>
             <div class="hotel-rank-card">
-              <span class="rank-badge">#3</span>
-              <h4>Hotel Californian</h4>
-              <p>Pricier, but earns it with an unbeatable combination of location, style, and beach proximity.</p>
-              <p class="rank-stat">~0.5 mi to ceremony</p>
+              <h4>The Eagle Inn</h4>
+              <p>A boutique B&amp;B in the West Beach neighborhood with daily breakfast included — many rooms feature fireplaces, two-person tubs, and balconies, a short walk from the beach and Funk Zone.</p>
+              <p class="rank-stat">~3 min walk to the beach &nbsp;·&nbsp; Breakfast included</p>
             </div>
           </div>
         </div>
@@ -1286,16 +1306,12 @@
         <div id="sb-map"></div>
         <div class="map-legend">
           <div class="legend-item">
-            <div class="legend-dot" style="background:#81726D;"></div>
+            <div class="legend-dot" style="background:#C0544A;"></div>
             <span>Wedding venues</span>
           </div>
           <div class="legend-item">
-            <div class="legend-dot" style="background:#3a302c;"></div>
+            <div class="legend-dot" style="background:#4A7A9B;"></div>
             <span>Recommended hotels</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-dot" style="background:#A89C94;"></div>
-            <span>Attractions</span>
           </div>
         </div>
       </div>
@@ -1309,8 +1325,12 @@
       <p class="sec-label">Dinner &amp; Celebration</p>
       <h2 class="sec-title">The Reception</h2>
       <div class="sec-rule"></div>
-      <div class="reception-grid">
-        <img src="distillery.avif" alt="Santa Barbara Courthouse Distillery" class="venue-photo" style="aspect-ratio:3/4;">
+      <div class="reception-photos">
+        <img src="distillery.avif" alt="Santa Barbara Courthouse Distillery" class="reception-photo">
+        <img src="distillery-2.avif" alt="Santa Barbara Courthouse Distillery" class="reception-photo">
+        <img src="distillery-3.jpg" alt="Santa Barbara Courthouse Distillery" class="reception-photo">
+      </div>
+      <div class="reception-info">
         <dl class="details">
           <dt>Location</dt>
           <dd>
@@ -1504,27 +1524,26 @@
         }).addTo(map);
 
         var s = {
-          venue:      { radius: 10, fillColor: '#81726D', color: '#5a5048', weight: 2, opacity: 1, fillOpacity: 0.9 },
-          hotel:      { radius: 8,  fillColor: '#3a302c', color: '#1e1916', weight: 2, opacity: 1, fillOpacity: 0.85 },
-          attraction: { radius: 7,  fillColor: '#A89C94', color: '#81726D', weight: 1.5, opacity: 1, fillOpacity: 0.8 }
+          venue:      { radius: 10, fillColor: '#C0544A', color: '#8B3A35', weight: 2, opacity: 1, fillOpacity: 0.9 },
+          hotel:      { radius: 8,  fillColor: '#4A7A9B', color: '#2E5E7A', weight: 2, opacity: 1, fillOpacity: 0.85 },
+          attraction: { radius: 7,  fillColor: '#5C8A5A', color: '#3D6B3B', weight: 1.5, opacity: 1, fillOpacity: 0.8 }
         };
 
         var venues = [
-          { name: 'Ceremony — Courthouse Gardens',     lat: 34.4276, lng: -119.7100, detail: '1100 Anacapa Street' },
-          { name: 'Reception — Courthouse Distillery', lat: 34.4229, lng: -119.7059, detail: '1114 State Street' }
+          { name: 'Ceremony — Courthouse Gardens',     lat: 34.4243, lng: -119.7025, detail: '1100 Anacapa Street' },
+          { name: 'Reception — Courthouse Distillery', lat: 34.4231, lng: -119.7034, detail: '1114 State Street' }
         ];
         var hotels = [
-          { name: 'Canary Hotel',               lat: 34.4203, lng: -119.7052, detail: '31 W Carrillo St<br>~0.1 mi to venues' },
-          { name: 'Inn of the Spanish Garden',  lat: 34.4268, lng: -119.7121, detail: '915 Garden St<br>~0.3 mi to ceremony' },
-          { name: 'Hotel Californian',           lat: 34.4164, lng: -119.6984, detail: '36 State St<br>~0.5 mi to ceremony' },
-          { name: 'Kimpton Goodland',            lat: 34.4444, lng: -119.8204, detail: '5650 Calle Real, Goleta<br>~8 mi to venues' }
+          { name: 'The Upham Hotel',             lat: 34.4235, lng: -119.7092, detail: '1404 De La Vina St<br>~0.3 mi to ceremony' },
+          { name: 'Casa Jardín',                 lat: 34.4254, lng: -119.6988, detail: '1018 Garden St<br>~0.3 mi to ceremony' },
+          { name: 'La Playa Inn',                lat: 34.4095, lng: -119.6952, detail: '116 Castillo St<br>~1 block to the beach' },
+          { name: 'The Milo',                    lat: 34.4103, lng: -119.6920, detail: '202 W. Cabrillo Blvd<br>Beachfront' },
+          { name: 'Harbor View Inn',             lat: 34.4118, lng: -119.6901, detail: '28 W. Cabrillo Blvd<br>Oceanfront' },
+          { name: 'Harbor House Inn',            lat: 34.4101, lng: -119.6935, detail: '104 Bath St<br>~1 block to West Beach' },
+          { name: 'The Eagle Inn',               lat: 34.4109, lng: -119.6944, detail: '232 Natoma Ave<br>~3 min walk to the beach' },
+          { name: 'Cheshire Cat Inn',            lat: 34.4272, lng: -119.7121, detail: '36 W Valerio St<br>Downtown' },
+          { name: 'Drift Santa Barbara',         lat: 34.4176, lng: -119.6961, detail: '524 State St<br>~0.6 mi to ceremony' }
         ];
-        var attractions = [
-          { name: 'East Beach',    lat: 34.4080, lng: -119.6805, detail: 'Santa Barbara\'s main beach' },
-          { name: 'Stearns Wharf', lat: 34.4079, lng: -119.6940, detail: 'Historic pier &amp; restaurants' },
-          { name: 'State Street',  lat: 34.4210, lng: -119.7030, detail: 'Main shopping &amp; dining' }
-        ];
-
         var all = [];
         venues.forEach(function (v) {
           all.push(L.circleMarker([v.lat, v.lng], s.venue)
@@ -1533,10 +1552,6 @@
         hotels.forEach(function (h) {
           all.push(L.circleMarker([h.lat, h.lng], s.hotel)
             .bindPopup('<strong>' + h.name + '</strong><br>' + h.detail).addTo(map));
-        });
-        attractions.forEach(function (a) {
-          all.push(L.circleMarker([a.lat, a.lng], s.attraction)
-            .bindPopup('<strong>' + a.name + '</strong><br>' + a.detail).addTo(map));
         });
 
         map.fitBounds(L.featureGroup(all).getBounds().pad(0.12));
