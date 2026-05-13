@@ -937,7 +937,139 @@
         transform: translateX(-110px) translateY(110px);
       }
     }
+
+    /* ─── HOTELS TOGGLE ─── */
+    .hotels-toggle {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+
+    .htoggle-btn {
+      background: transparent;
+      border: 1px solid rgba(168, 156, 148, 0.45);
+      padding: 11px 36px;
+      font-family: 'Georgia', serif;
+      font-size: 0.67rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--tree-mid);
+      cursor: pointer;
+      transition: background 0.22s, color 0.22s, border-color 0.22s;
+    }
+
+    .htoggle-btn + .htoggle-btn {
+      border-left: none;
+    }
+
+    .htoggle-btn.active {
+      background: var(--tree-dark);
+      border-color: var(--tree-dark);
+      color: var(--bg);
+    }
+
+    /* ─── HOTEL CATEGORIES ─── */
+    .hotel-category {
+      margin-bottom: 44px;
+    }
+
+    .category-label {
+      font-size: 0.63rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--tree-mid);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .hotel-rank-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .hotel-rank-card {
+      padding: 22px 20px 24px;
+      border: 1px solid rgba(168, 156, 148, 0.3);
+    }
+
+    .rank-badge {
+      display: block;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--tree-mid);
+      margin-bottom: 10px;
+    }
+
+    .hotel-rank-card:first-child .rank-badge {
+      color: var(--tree-dark);
+    }
+
+    .hotel-rank-card h4 {
+      font-size: 0.95rem;
+      font-weight: normal;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .hotel-rank-card p {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      line-height: 1.75;
+    }
+
+    .rank-stat {
+      margin-top: 10px;
+      font-style: italic;
+      font-size: 0.77rem;
+      color: var(--tree-mid);
+    }
+
+    /* ─── HOTELS MAP ─── */
+    #sb-map {
+      height: 480px;
+      border: 1px solid rgba(168, 156, 148, 0.3);
+      margin-bottom: 20px;
+      border-radius: 2px;
+    }
+
+    .map-legend {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.73rem;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 700px) {
+      .hotel-rank-list {
+        grid-template-columns: 1fr;
+      }
+
+      #sb-map {
+        height: 360px;
+      }
+    }
   </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
 </head>
 
 <body>
@@ -1062,38 +1194,112 @@
       <h2 class="sec-title">Hotel Recommendations</h2>
       <div class="sec-rule"></div>
       <p class="story-blurb">
-        We're heading to Santa Barbara in April to explore the area firsthand and find
-        the best places for our guests to stay. Check back soon — recommendations are coming!
+        Santa Barbara is a small, walkable city — wherever you stay, you'll be close to everything.
+        We spent a few days there in March and have some favorites to share,
+        but feel free to find your own perfect spot.
       </p>
 
-      <!--
-      <div class="hotels-grid">
-        <div class="hotel-card">
-          <div class="hotel-tier">Closest to Venue</div>
-          <h3>Canary Hotel</h3>
-          <p>A boutique hotel in the heart of downtown Santa Barbara with a rooftop terrace,
-            fireplace, and sweeping views of the Santa Ynez Mountains.</p>
-          <p class="hotel-dist">~0.2 miles from venue</p>
-          <a class="hotel-link" href="#">Book a Room →</a>
+      <div class="hotels-toggle">
+        <button class="htoggle-btn active" data-view="categories">By Category</button>
+        <button class="htoggle-btn" data-view="map">Map View</button>
+      </div>
+
+      <!-- Category view -->
+      <div id="hotels-categories" class="hotels-view">
+
+        <div class="hotel-category">
+          <p class="category-label">Closest to the Wedding</p>
+          <div class="hotel-rank-list">
+            <div class="hotel-rank-card">
+              <span class="rank-badge">#1</span>
+              <h4>Canary Hotel</h4>
+              <p>Boutique luxury in the heart of downtown with a rooftop terrace — steps from both the ceremony and reception.</p>
+              <p class="rank-stat">~0.1 mi to ceremony &nbsp;·&nbsp; ~0.1 mi to reception</p>
+            </div>
+            <div class="hotel-rank-card">
+              <span class="rank-badge">#2</span>
+              <h4>Inn of the Spanish Garden</h4>
+              <p>Quiet, intimate boutique hotel tucked near the courthouse in a Spanish Colonial courtyard setting.</p>
+              <p class="rank-stat">~0.3 mi to ceremony &nbsp;·&nbsp; ~0.4 mi to reception</p>
+            </div>
+            <div class="hotel-rank-card">
+              <span class="rank-badge">#3</span>
+              <h4>Hotel Californian</h4>
+              <p>Elegant Moorish Revival architecture at the south end of State Street — an easy stroll to both venues.</p>
+              <p class="rank-stat">~0.5 mi to ceremony &nbsp;·&nbsp; ~0.4 mi to reception</p>
+            </div>
+          </div>
         </div>
-        <div class="hotel-card">
-          <div class="hotel-tier">Recommended</div>
-          <h3>Hotel Californian</h3>
-          <p>Elegant Moorish Revival architecture, a rooftop pool, and a short stroll to the venue
-            along the palm-lined streets of downtown.</p>
-          <p class="hotel-dist">~0.5 miles from venue</p>
-          <a class="hotel-link" href="#">Book a Room →</a>
+
+        <div class="hotel-category">
+          <p class="category-label">Best Beach Access</p>
+          <div class="hotel-rank-list">
+            <div class="hotel-rank-card">
+              <span class="rank-badge">#1</span>
+              <h4>Hotel Californian</h4>
+              <p>Two blocks from the sand with sweeping Pacific views — the easiest walk to the beach from any downtown hotel.</p>
+              <p class="rank-stat">~2 blocks to East Beach</p>
+            </div>
+            <div class="hotel-rank-card">
+              <span class="rank-badge">#2</span>
+              <h4>Canary Hotel</h4>
+              <p>A short walk down State Street puts you at the waterfront. The rooftop terrace already feels like a beach club.</p>
+              <p class="rank-stat">~0.6 mi to East Beach</p>
+            </div>
+            <div class="hotel-rank-card">
+              <span class="rank-badge">#3</span>
+              <h4>Kimpton Goodland</h4>
+              <p>A laid-back, surf-adjacent vibe in nearby Goleta with easy freeway access to Santa Barbara beaches.</p>
+              <p class="rank-stat">~1.5 mi to the beach</p>
+            </div>
+          </div>
         </div>
-        <div class="hotel-card">
-          <div class="hotel-tier">Beachside Option</div>
-          <h3>Hotel Indigo</h3>
-          <p>Colorful, locally inspired boutique hotel just blocks from the beach with an
-            outdoor pool and easy access to State Street.</p>
-          <p class="hotel-dist">~0.8 miles from venue</p>
-          <a class="hotel-link" href="#">Book a Room →</a>
+
+        <div class="hotel-category">
+          <p class="category-label">Best Value</p>
+          <div class="hotel-rank-list">
+            <div class="hotel-rank-card">
+              <span class="rank-badge">#1</span>
+              <h4>Kimpton Goodland</h4>
+              <p>Relaxed, well-designed, and priced well below the downtown options — great if you want more room for more nights.</p>
+              <p class="rank-stat">~8 mi to venues &nbsp;·&nbsp; IHG rewards accepted</p>
+            </div>
+            <div class="hotel-rank-card">
+              <span class="rank-badge">#2</span>
+              <h4>Inn of the Spanish Garden</h4>
+              <p>Boutique charm without the luxury markup — calm courtyards and a genuinely central location.</p>
+              <p class="rank-stat">~0.3 mi to ceremony</p>
+            </div>
+            <div class="hotel-rank-card">
+              <span class="rank-badge">#3</span>
+              <h4>Hotel Californian</h4>
+              <p>Pricier, but earns it with an unbeatable combination of location, style, and beach proximity.</p>
+              <p class="rank-stat">~0.5 mi to ceremony</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Map view -->
+      <div id="hotels-map" class="hotels-view" hidden>
+        <div id="sb-map"></div>
+        <div class="map-legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#81726D;"></div>
+            <span>Wedding venues</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#3a302c;"></div>
+            <span>Recommended hotels</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#A89C94;"></div>
+            <span>Attractions</span>
+          </div>
         </div>
       </div>
-      -->
+
     </div>
   </section>
 
@@ -1103,30 +1309,24 @@
       <p class="sec-label">Dinner &amp; Celebration</p>
       <h2 class="sec-title">The Reception</h2>
       <div class="sec-rule"></div>
-      <p class="story-blurb">
-        We're still searching for the perfect spot — our trip to Santa Barbara in April
-        will help us find a reception venue worthy of the occasion. Details to follow soon!
-      </p>
-
-      <!--
       <div class="reception-grid">
-        <div class="ph ar-3-4">reception venue photo</div>
+        <img src="distillery.avif" alt="Santa Barbara Courthouse Distillery" class="venue-photo" style="aspect-ratio:3/4;">
         <dl class="details">
           <dt>Location</dt>
-          <dd>[Reception venue name]<br>[Address, Santa Barbara, CA]</dd>
+          <dd>
+            Santa Barbara Courthouse Distillery<br>
+            1114 State Street<br>
+            Santa Barbara, CA 93101<br>
+            <a class="map-link"
+              href="https://www.google.com/maps/search/?api=1&query=1114+State+Street+Santa+Barbara+CA+93101"
+              target="_blank" rel="noopener">View on Google Maps →</a>
+          </dd>
           <dt>Time</dt>
           <dd>Immediately following the ceremony<br>Cocktail hour begins at approximately 4:00 pm</dd>
-          <dt>Dinner</dt>
-          <dd>[Dinner style — seated, family-style, buffet, etc. A sentence or two about the food.]</dd>
           <dt>Dress Code</dt>
           <dd>Cocktail attire</dd>
-          <dt>Music &amp; Dancing</dt>
-          <dd>[Band, DJ, or other entertainment details]</dd>
-          <dt>End Time</dt>
-          <dd>The celebration will conclude at approximately [time]</dd>
         </dl>
       </div>
-      -->
     </div>
   </section>
 
@@ -1208,6 +1408,7 @@
     <p>Ajla &amp; Seth &nbsp;·&nbsp; November 22, 2026 &nbsp;·&nbsp; Santa Barbara, California</p>
   </footer>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script>
     // Slide trees off-screen on mobile when scrolling
     (function () {
@@ -1274,6 +1475,73 @@
         + '?subject=' + encodeURIComponent('RSVP — ' + first + ' ' + last)
         + '&body=' + encodeURIComponent(body);
     });
+
+    // Hotels view toggle + map
+    (function () {
+      var toggleBtns = document.querySelectorAll('.htoggle-btn');
+      var mapInitialized = false;
+
+      toggleBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var view = this.dataset.view;
+          toggleBtns.forEach(function (b) { b.classList.remove('active'); });
+          this.classList.add('active');
+          document.getElementById('hotels-categories').hidden = (view !== 'categories');
+          document.getElementById('hotels-map').hidden = (view !== 'map');
+          if (view === 'map' && !mapInitialized) {
+            mapInitialized = true;
+            initSbMap();
+          }
+        });
+      });
+
+      function initSbMap() {
+        var map = L.map('sb-map');
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+          attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
+          maxZoom: 19
+        }).addTo(map);
+
+        var s = {
+          venue:      { radius: 10, fillColor: '#81726D', color: '#5a5048', weight: 2, opacity: 1, fillOpacity: 0.9 },
+          hotel:      { radius: 8,  fillColor: '#3a302c', color: '#1e1916', weight: 2, opacity: 1, fillOpacity: 0.85 },
+          attraction: { radius: 7,  fillColor: '#A89C94', color: '#81726D', weight: 1.5, opacity: 1, fillOpacity: 0.8 }
+        };
+
+        var venues = [
+          { name: 'Ceremony — Courthouse Gardens',     lat: 34.4276, lng: -119.7100, detail: '1100 Anacapa Street' },
+          { name: 'Reception — Courthouse Distillery', lat: 34.4229, lng: -119.7059, detail: '1114 State Street' }
+        ];
+        var hotels = [
+          { name: 'Canary Hotel',               lat: 34.4203, lng: -119.7052, detail: '31 W Carrillo St<br>~0.1 mi to venues' },
+          { name: 'Inn of the Spanish Garden',  lat: 34.4268, lng: -119.7121, detail: '915 Garden St<br>~0.3 mi to ceremony' },
+          { name: 'Hotel Californian',           lat: 34.4164, lng: -119.6984, detail: '36 State St<br>~0.5 mi to ceremony' },
+          { name: 'Kimpton Goodland',            lat: 34.4444, lng: -119.8204, detail: '5650 Calle Real, Goleta<br>~8 mi to venues' }
+        ];
+        var attractions = [
+          { name: 'East Beach',    lat: 34.4080, lng: -119.6805, detail: 'Santa Barbara\'s main beach' },
+          { name: 'Stearns Wharf', lat: 34.4079, lng: -119.6940, detail: 'Historic pier &amp; restaurants' },
+          { name: 'State Street',  lat: 34.4210, lng: -119.7030, detail: 'Main shopping &amp; dining' }
+        ];
+
+        var all = [];
+        venues.forEach(function (v) {
+          all.push(L.circleMarker([v.lat, v.lng], s.venue)
+            .bindPopup('<strong>' + v.name + '</strong><br>' + v.detail).addTo(map));
+        });
+        hotels.forEach(function (h) {
+          all.push(L.circleMarker([h.lat, h.lng], s.hotel)
+            .bindPopup('<strong>' + h.name + '</strong><br>' + h.detail).addTo(map));
+        });
+        attractions.forEach(function (a) {
+          all.push(L.circleMarker([a.lat, a.lng], s.attraction)
+            .bindPopup('<strong>' + a.name + '</strong><br>' + a.detail).addTo(map));
+        });
+
+        map.fitBounds(L.featureGroup(all).getBounds().pad(0.12));
+      }
+    })();
   </script>
 
 </body>
